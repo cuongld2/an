@@ -42,7 +42,7 @@ Click on admin icon at the left bottom of the screen --> choose `Profile`.
 Then export the access token to the `RP_TOKEN` environment using the following command:
 
 ```bash
-export RP_TOKEN='your_admin_token'
+export RP_TOKEN=your_admin_token
 ```
 
 2. Run the test
