@@ -9,5 +9,5 @@ export async function addScreenshot(page: Page, screenshotName: string):Promise<
       type: 'image/jpg',
       content: screenshot3.toString('base64'),
     };
-    ReportingApi.launchLog(LOG_LEVELS.INFO, 'info log with attachment', attachment3);
+    ReportingApi.launchLog(LOG_LEVELS.ERROR, 'info log with attachment', attachment3);
     };

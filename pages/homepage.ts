@@ -5,8 +5,11 @@ export class HomePage {
   readonly searchBox: Locator;
   readonly firstResult: Locator;
   readonly tenDaysTab: Locator;
-  readonly languageSelection: Locator;
+  readonly arrowButton: Locator;
+  readonly arrowState: Locator;
   readonly degreesCButton: Locator;
+  readonly degreesFButton: Locator;
+  readonly unitDisplay: Locator
 
 
 
@@ -15,12 +18,15 @@ export class HomePage {
     this.searchBox = page.getByTestId("searchModalInputBox");
     this.firstResult = page.getByRole("alert").getByRole("listbox").getByTestId("ctaButton").first();
     this.tenDaysTab = page.locator('a[href*="/weather/tenday/l"][class*="ListItem"] > span');
-    this.languageSelection = page.getByTestId('languageSelectorSection');
-    this.degreesCButton = page.getByTestId('degreesCbutton');
+    this.arrowButton = page.locator('div[class*="LanguageSelector"] > svg[name="triangle-down"][data-testid="Icon"]');
+    this.arrowState = page.getByTestId('languageSelectorSection').getByTestId('ctaButton');
+    this.degreesCButton = page.locator('section[data-testid="unitSelectorSection"]').locator('li[data-testid="degreesCbutton"]');
+    this.degreesFButton = page.locator('section[data-testid="unitSelectorSection"]').locator('li[data-testid="degreesFbutton"]');
+    this.unitDisplay = page.locator('span[class*="LanguageSelector--unitDisplay"]');
   }
 
   async goto() {
-    await this.page.goto('https://weather.com/');
+    await this.page.goto('https://weather.com');
   }
 
   async searchWeatherByCityName(cityName: string) {
@@ -29,10 +35,28 @@ export class HomePage {
   await this.tenDaysTab.click();
   }
 
+  async changeTemperatureUnitToF(){
+
+    const currentUnitType = await this.unitDisplay.textContent();
+    if (currentUnitType?.includes("C")){
+      await this.changeToFahreint();
+    }
+  }
+
   async changeToCelsius(){
 
-    await this.languageSelection.click();
+    while (await this.arrowState.getAttribute('aria-expanded') == "false"){
+      await this.arrowButton.click();
+    }
     await this.degreesCButton.click();
+  }
+
+  async changeToFahreint(){
+
+    while (await this.arrowState.getAttribute('aria-expanded') == "false"){
+      await this.arrowButton.click();
+    }
+    await this.degreesFButton.click();
   }
 
 }

@@ -13,7 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
 const RPconfig = {
   apiKey: process.env.RP_TOKEN,
   endpoint: 'http://localhost:8082/api/v1',
-  project: 'default_personal',
+  project: 'superadmin_personal',
   launch: 'test weather cities',
   description: 'Check fahreint and celsius temperature',
 };
@@ -21,7 +21,7 @@ const RPconfig = {
 export default defineConfig({
   testDir: './tests',
   reporter: [['@reportportal/agent-js-playwright', RPconfig],['html']],
-  timeout:600000,
+  timeout:120000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -38,7 +38,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: false,
+    headless: true,
   },
 
   /* Configure projects for major browsers */

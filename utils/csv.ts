@@ -1,11 +1,12 @@
-import * as path from 'path';
 import {createObjectCsvWriter} from 'csv-writer';
 import { CsvWriter } from 'csv-writer/src/lib/csv-writer';
 import { ObjectMap } from 'csv-writer/src/lib/lang/object';
+import fs from 'fs';
+import * as path from 'path';
 
 export async function createCsvFile(csvFileName: string):Promise<CsvWriter<ObjectMap<any>>>{
     return createObjectCsvWriter({
-        path: path.resolve(__dirname, csvFileName),
+        path: path.resolve('', csvFileName),
         header: [
           { id: 'city', title: 'City Name' },
           { id: 'date', title: 'Date' },
