@@ -45,7 +45,7 @@ export class HomePage {
 
   async changeToCelsius(){
 
-    while (await this.arrowState.getAttribute('aria-expanded') == "false"){
+    if (await this.arrowState.getAttribute('aria-expanded') == "false"){
       await this.arrowButton.click();
     }
     await this.degreesCButton.click();
@@ -53,7 +53,7 @@ export class HomePage {
 
   async changeToFahreint(){
 
-    while (await this.arrowState.getAttribute('aria-expanded') == "false"){
+    if (await this.arrowState.getAttribute('aria-expanded') == "false"){
       await this.arrowButton.click();
     }
     await this.degreesFButton.click();
